@@ -7,7 +7,8 @@ resource "aws_vpc" "this" {
   }
 }
 
-## Criando as Subnets PrivadaS (Private Subnet)
+## Criando as Subnets
+# Private Subnets
 resource "aws_subnet" "private_subnets" {
   count      = length(var.private_subnet_cidrs)
   vpc_id     = aws_vpc.this.id
