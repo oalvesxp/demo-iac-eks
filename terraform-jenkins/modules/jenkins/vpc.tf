@@ -18,3 +18,14 @@ resource "aws_subnet" "private_subnets" {
     Name = "private-subnet-${count.index + 1}"
   }
 }
+
+# Public Subnets
+resource "aws_subnet" "public_subnets" {
+  count = length(var.public_subnet_cidrs)
+  vpc_id = aws_vpc.this.id
+  cidr_block = element(var.private_subnet_cidrs, count.index)
+
+  tags = {
+    Name = "public-subnet-${count.index + 1}"
+  }
+}
