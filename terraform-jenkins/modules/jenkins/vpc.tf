@@ -14,3 +14,10 @@ resource "aws_subnet" "this" {
     Name = "${var.env_prefix}-subnet-1"
   }
 }
+
+resource "aws_internet_gateway" "this" {
+  vpc_id = aws_subnet.this.id
+  tags = {
+    Name = "${var.env_prefix}-igw"
+  }
+}
