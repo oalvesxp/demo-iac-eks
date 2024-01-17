@@ -16,7 +16,7 @@ resource "aws_subnet" "private_subnets" {
   availability_zone = element(var.azs, count.index)
 
   tags = {
-    Name = "private-subnet-${count.index + 1}"
+    Name = "${var.env_prefix}-private-subnet-${count.index + 1}"
   }
 }
 
@@ -28,6 +28,15 @@ resource "aws_subnet" "public_subnets" {
   availability_zone = element(var.azs, count.index)
 
   tags = {
-    Name = "public-subnet-${count.index + 1}"
+    Name = "${var.env_prefix}-public-subnet-${count.index + 1}"
+  }
+}
+
+## Criando o Internet Gateway (IGW)
+resource "aws_internet_gateway" "this" {
+  vpc_id = aws_vpc.this.id
+
+  tags = {
+    Name = "${var.env_prefix}-igw"
   }
 }
