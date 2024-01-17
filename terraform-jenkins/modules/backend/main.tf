@@ -1,6 +1,6 @@
 ## Criando o bucket para o Backend externo "*.tfstate"
 resource "aws_s3_bucket" "this" {
-  bucket = var.bucke_name
+  bucket        = var.bucke_name
   force_destroy = true
 }
 
@@ -24,9 +24,9 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "this" {
 
 ## Criando a tabela DynamoDB para o os Locks externos "*.lock"
 resource "aws_dynamodb_table" "this" {
-  name = var.table_name
+  name         = var.table_name
   billing_mode = "PAY_PER_REQUEST"
-  hash_key = "LockID"
+  hash_key     = "LockID"
 
   attribute {
     name = "LockID"
