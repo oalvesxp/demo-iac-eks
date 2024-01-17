@@ -1,3 +1,4 @@
+## Criando a VPC
 resource "aws_vpc" "this" {
   cidr_block = var.vpc_cidr_block
   tags = {
@@ -5,6 +6,7 @@ resource "aws_vpc" "this" {
   }
 }
 
+## Criando a Subnet
 resource "aws_subnet" "this" {
   vpc_id            = aws_vpc.this.id
   cidr_block        = var.subnet_cidr_block
@@ -15,6 +17,7 @@ resource "aws_subnet" "this" {
   }
 }
 
+## Criando o Internet Gateway
 resource "aws_internet_gateway" "this" {
   vpc_id = aws_subnet.this.id
 
@@ -23,6 +26,7 @@ resource "aws_internet_gateway" "this" {
   }
 }
 
+## Criando a Route Table para VPC
 resource "aws_default_route_table" "this" {
   default_route_table_id = aws_vpc.this.default_route_table_id
 
