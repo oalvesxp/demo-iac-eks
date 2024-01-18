@@ -15,3 +15,15 @@ resource "aws_internet_gateway" "this" {
     Name = "${var.env_prefix}-vpc"
   }
 }
+
+## Criando as Sub-redes (Subnets)
+## Sub-redes Privadas (Private)
+resource "aws_subnet" "private" {
+  count      = length(var.private_subnet_cidrs)
+  vpc_id     = aws_vpc.this.id
+  cidr_block = element(var.private_subnet_cidrs, count.index)
+
+  tags = {
+    Name = "${var.env_prefix}-private-subnet-${count.index + 1}"
+  }
+}
