@@ -11,11 +11,16 @@ variable "vpc_cidr" {
 }
 
 variable "azs" {
-  description = "Zonas de Disponibilidade (AZ's)"
+  description = "Zonas de disponibilidade (AZ's)"
   type        = list(string)
 }
 
 variable "private_subnet_cidrs" {
   description = "CIDR das sub-redes privadas"
+  type        = list(string)
+}
+
+variable "public_subnet_cidrs" {
+  description = "CIDR das sub-redes públicas"
   type        = list(string)
 }
