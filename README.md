@@ -1,2 +1,2 @@
-# demo-iac-jenkins
-Demo de projeto IaC para vaga de DevOps. Provisionando e configurando um servidor de CI/CD com IaC.
+# Demo IaC - AWS EKS
+Demo de projeto IaC para vaga de DevOps. Provisionando e configurando um cluster EKS para uma API.
