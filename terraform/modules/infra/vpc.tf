@@ -40,3 +40,14 @@ resource "aws_subnet" "public" {
     Name = "${var.env_prefix}-public-subnet-${count.index + 1}"
   }
 }
+
+## Criando o NGW (NAT Gateway)
+# EIP (Elastic IP)
+resource "aws_eip" "nat_gateway" {
+  count      = length(var.private_subnet_cidrs)
+  depends_on = [aws_internet_gateway.this]
+
+  tags = {
+    Name = "${var.env_prefix}-eip-ngw-${count.index + 1}"
+  }
+}
