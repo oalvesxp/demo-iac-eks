@@ -1,4 +1,4 @@
-## Variáveis do Ambiente (Environment)
+## Variáveis do Environment
 variable "env_prefix" {
   description = "Nome do ambiente"
   type        = string
@@ -10,23 +10,18 @@ variable "vpc_cidr" {
   type        = string
 }
 
-variable "azs" {
-  description = "Zonas de disponibilidade (AZ's)"
-  type        = list(string)
-}
-
+## Variáveis das Sub-redes (Subnets)
 variable "private_subnet_cidrs" {
-  description = "CIDR das sub-redes privadas"
+  description = "CIDR das Sub-redes privadas"
   type        = list(string)
 }
 
 variable "public_subnet_cidrs" {
-  description = "CIDR das sub-redes públicas"
+  description = "CIDR das Sub-redes privadas"
   type        = list(string)
 }
 
-## Variáveis do EKS (Elastic Kubernetes Service)
-variable "cluster_name" {
-  description = "Nome do cluster EKS"
-  type        = string
+variable "azs" {
+  description = "Zonas de disponibilidade (AZ's)"
+  type        = list(string)
 }
