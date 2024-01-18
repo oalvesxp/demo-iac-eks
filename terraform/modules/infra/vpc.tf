@@ -51,3 +51,14 @@ resource "aws_eip" "nat_gateway" {
     Name = "${var.env_prefix}-eip-ngw-${count.index + 1}"
   }
 }
+
+# NGW (NAT Gateway)
+resource "aws_nat_gateway" "this" {
+  count         = length(var.private_subnet_cidrs)
+  allocation_id = aws_eip.nat_gateway[count.index].id
+  subnet_id     = aws_subnet.private[count.index].id
+
+  tags = {
+    Name = "${var.env_prefix}-ngw-${count.index + 1}"
+  }
+}
