@@ -62,3 +62,27 @@ resource "aws_nat_gateway" "this" {
     Name = "${var.env_prefix}-ngw-${count.index + 1}"
   }
 }
+
+## Criando as Tabelas de Rota (Route Table)
+# Tabelas de Rotas privadas (Private Route Table)
+resource "aws_route_table" "private" {
+  count  = length(var.private_subnet_cidrs)
+  vpc_id = aws_vpc.this.id
+
+  tags = {
+    Name = "${var.env_prefix}-private-rt-${count.index + 1}"
+  }
+}
+
+resource "aws_route" "nat_gateway" {
+  count                  = length(var.private_subnet_cidrs)
+  destination_cidr_block = "0.0.0.0/0"
+  route_table_id         = aws_route_table.private[count.index].id
+  nat_gateway_id         = aws_nat_gateway.this[count.index].id
+}
+
+resource "aws_route_table_association" "private" {
+  count          = length(var.private_subnet_cidrs)
+  subnet_id      = aws_subnet.private[count.index].id
+  route_table_id = aws_route_table.private[count.index].id
+}
