@@ -24,3 +24,9 @@ variable "public_subnet_cidrs" {
   description = "CIDR das sub-redes públicas"
   type        = list(string)
 }
+
+## Variáveis do EKS (Elastic Kubernetes Service)
+variable "cluster_name" {
+  description = "Nome do cluster EKS"
+  type        = string
+}
