@@ -11,5 +11,10 @@ terraform {
 
 provider "aws" {
   region  = "us-east-1"
-  profile = "default"
+  profile = "terraform"
+}
+
+## Módulo de Backend externo
+module "backend" {
+  source = "../../modules/backend"
 }
