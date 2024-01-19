@@ -14,3 +14,9 @@ resource "aws_iam_role" "nodes" {
     Version = "2012-10-17"
   })
 }
+
+## Anexando a politica de 'EKS Worker' a role 'RoleForEKSGroupNodes'
+resource "aws_iam_role_policy_attachment" "nodes_eks_worker_policy" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
+  role = aws_iam_role.nodes.name
+}
