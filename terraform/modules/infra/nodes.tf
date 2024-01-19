@@ -32,3 +32,9 @@ resource "aws_iam_role_policy_attachment" "nodes_ec2_container_registry_policy" 
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
   role       = aws_iam_role.nodes.name
 }
+
+# Anexando a politica de 'AmazonSSMManagedInstanceCore' a role 'RoleForEKSGroupNodes'
+resource "aws_iam_role_policy_attachment" "nodes_ssm_managed_instance_core" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+  role       = aws_iam_role.nodes.name
+}
