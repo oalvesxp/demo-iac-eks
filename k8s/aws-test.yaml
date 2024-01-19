@@ -4,6 +4,8 @@ kind: ServiceAccount
 metadata:
   name: aws-test
   namespace: default
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::831511089306:role/RoleForTestOIDC
 ---
 apiVersion: v1
 kind: Pod
