@@ -1,4 +1,5 @@
 ## Criando o cluster EKS (Elastic Kubernetes Service)
+# Criando a regra para o IAM (Role)
 resource "aws_iam_role" "cluster_policy" {
   name = "RoleForEKSClusterDemo"
 
@@ -18,11 +19,13 @@ resource "aws_iam_role" "cluster_policy" {
   POLICY
 }
 
+# Anexando a politica 'AmazonEKSClusterPolicy' a role 'RoleForEKSClusterDemo'
 resource "aws_iam_role_policy_attachment" "demo_eks_cluster_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
   role       = aws_iam_role.cluster_policy.name
 }
 
+# Criando o cluster EKS
 resource "aws_eks_cluster" "demo" {
   name     = "${var.env_prefix}-demo"
   version  = "1.24"
