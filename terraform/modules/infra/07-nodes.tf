@@ -28,14 +28,8 @@ resource "aws_iam_role_policy_attachment" "nodes_eks_cni_policy" {
 }
 
 # Anexando a politica de 'AmazonEC2ContainerRegistryReadOnly' a role 'RoleForEKSGroupNodes'
-resource "aws_iam_role_policy_attachment" "nodes_ec2_container_registry_policy" {
+resource "aws_iam_role_policy_attachment" "nodes_ec2_container_registry_readonly_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
-  role       = aws_iam_role.nodes.name
-}
-
-# Anexando a politica de 'AmazonSSMManagedInstanceCore' a role 'RoleForEKSGroupNodes'
-resource "aws_iam_role_policy_attachment" "nodes_ssm_managed_instance_core" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
   role       = aws_iam_role.nodes.name
 }
 
@@ -46,20 +40,25 @@ resource "aws_eks_node_group" "private" {
   node_role_arn   = aws_iam_role.nodes.arn
 
   subnet_ids = [
-    aws_subnet.private[0].id
+    aws_subnet.private[0].id,
+    aws_subnet.private[1].id
   ]
 
   capacity_type  = "ON_DEMAND"
-  instance_types = ["t3.medium"]
+  instance_types = ["t3.small"]
 
   scaling_config {
-    desired_size = 2
+    desired_size = 1
     max_size     = 5
-    min_size     = 1
+    min_size     = 0
   }
 
   update_config {
     max_unavailable = 1
+  }
+
+  labels = {
+    role = "general"
   }
 
   depends_on = [

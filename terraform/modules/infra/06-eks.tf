@@ -28,7 +28,6 @@ resource "aws_iam_role_policy_attachment" "demo_eks_cluster_policy" {
 # Criando o cluster EKS
 resource "aws_eks_cluster" "demo" {
   name     = "${var.env_prefix}-demo"
-  version  = "1.24"
   role_arn = aws_iam_role.cluster_policy.arn
 
   vpc_config {
