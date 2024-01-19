@@ -4,6 +4,5 @@ resource "aws_internet_gateway" "this" {
 
   tags = {
     "Name" = "igw"
-    "Env"  = "${var.env_prefix}"
   }
 }

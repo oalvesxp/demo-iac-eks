@@ -4,6 +4,5 @@ resource "aws_vpc" "this" {
 
   tags = {
     "Name" = "main"
-    "Env"  = "${var.env_prefix}"
   }
 }
