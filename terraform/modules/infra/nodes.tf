@@ -15,14 +15,20 @@ resource "aws_iam_role" "nodes" {
   })
 }
 
-## Anexando a politica de 'EKS Worker' a role 'RoleForEKSGroupNodes'
+# Anexando a politica de 'EKS Worker' a role 'RoleForEKSGroupNodes'
 resource "aws_iam_role_policy_attachment" "nodes_eks_worker_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
-  role = aws_iam_role.nodes.name
+  role       = aws_iam_role.nodes.name
 }
 
-## Anexando a politica de 'EKS CNI' a role 'RoleForEKSGroupNodes'
+# Anexando a politica de 'EKS CNI' a role 'RoleForEKSGroupNodes'
 resource "aws_iam_role_policy_attachment" "nodes_eks_cni_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
-  role = aws_iam_role.nodes.name
+  role       = aws_iam_role.nodes.name
+}
+
+# Anexando a politica de 'AmazonEC2ContainerRegistryReadOnly' a role 'RoleForEKSGroupNodes'
+resource "aws_iam_role_policy_attachment" "nodes_ec2_container_registry_policy" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+  role       = aws_iam_role.nodes.name
 }
