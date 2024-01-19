@@ -22,7 +22,6 @@ resource "aws_iam_role" "test_oidc" {
   name               = "RoleForTestOIDC"
 }
 
-
 resource "aws_iam_policy" "test-policy" {
   name = "TestPolicy"
 
@@ -42,8 +41,4 @@ resource "aws_iam_policy" "test-policy" {
 resource "aws_iam_role_policy_attachment" "test_attach" {
   role       = aws_iam_role.test_oidc.name
   policy_arn = aws_iam_policy.test-policy.arn
-}
-
-output "test_policy_arn" {
-  value = aws_iam_role.test_oidc.arn
 }
